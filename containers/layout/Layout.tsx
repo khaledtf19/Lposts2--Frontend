@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import Navbar from "../../componetns/navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import styles from "./Layout.module.scss";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {

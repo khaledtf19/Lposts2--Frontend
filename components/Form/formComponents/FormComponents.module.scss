@@ -1,0 +1,36 @@
+.input__container {
+  display: flex;
+  flex-direction: column;
+}
+.input {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--color-btn);
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-btn-hover);
+  }
+  &focus {
+    background-color: var(--color-btn-hover);
+  }
+}
