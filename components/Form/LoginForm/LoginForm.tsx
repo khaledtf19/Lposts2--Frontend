@@ -1,59 +1,58 @@
+import { useRouter } from "next/router";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import FormContainer from "../../../containers/formContainer/FormContainer";
 import {
-  FormInput,
   FormHeader,
+  FormInput,
   FormSubmitBtn,
 } from "../formComponents/FormComponents";
 
 import utilsStyles from "../../../styles/utils.module.scss";
-import { RegisterInputs } from "./RegisterFormInterface";
+import { LoginInputs } from "./LoginFormInterface";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { fetchUserData } from "../../../features/auth/authSlice";
 
-const registerSchema = yup.object().shape({
-  name: yup.string().min(2).required("Name is required"),
+const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
   password: yup.string().min(8).required("Password is required"),
-  confirmPassword: yup
-    .string()
-    .min(8)
-    .oneOf([yup.ref("password"), null])
-    .required("confirm Password is required"),
 });
 
-function RegisterForm() {
+const LoginForm = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterInputs>({
-    resolver: yupResolver(registerSchema),
+  } = useForm<LoginInputs>({
+    resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async (data: RegisterInputs) => {
-    const response = await fetch("http://localhost:3000/users", {
-      body: JSON.stringify(data),
+  const onSubmit = async (data: LoginInputs) => {
+    const response = await fetch("http://localhost:3000/auth/login", {
+      body: JSON.stringify({ username: data.email, password: data.password }),
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
     const fData = await response.json();
+    if (fData.data.access_token) {
+      localStorage.setItem(
+        "Lposts2__token",
+        JSON.stringify(fData.data.access_token)
+      );
+      dispatch(fetchUserData()).then(() => router.push("/profile"));
+    }
     console.log(fData);
   };
 
   return (
     <FormContainer>
       <form className={utilsStyles.form} onSubmit={handleSubmit(onSubmit)}>
-        <FormHeader text="Register" />
-        <FormInput
-          name="name"
-          label="Name:"
-          type="text"
-          placeholder="Name"
-          register={register("name")}
-          errorMessage={errors.name?.message}
-        />
+        <FormHeader text="Login" />
         <FormInput
           name="email"
           label="Email:"
@@ -70,18 +69,10 @@ function RegisterForm() {
           register={register("password")}
           errorMessage={errors.password?.message}
         />
-        <FormInput
-          name="confirmPassword"
-          label="Confirm Password:"
-          type="password"
-          placeholder="Confirm Password..."
-          register={register("confirmPassword")}
-          errorMessage={errors.confirmPassword?.message}
-        />
-        <FormSubmitBtn text="Register" />
+        <FormSubmitBtn text="Login" />
       </form>
     </FormContainer>
   );
-}
+};
 
-export default RegisterForm;
+export default LoginForm;

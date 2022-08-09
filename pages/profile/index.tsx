@@ -1,7 +1,7 @@
-import React from "react";
+import ProtectedPage from "../../components/protectedPage/ProtectedPage";
 
 const Profile = () => {
-  return <div>index</div>;
+  return <ProtectedPage>index</ProtectedPage>;
 };
 
 export default Profile;

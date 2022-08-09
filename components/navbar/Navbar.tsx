@@ -19,6 +19,11 @@ export const NotLogged = () => {
           <a>register</a>
         </Link>
       </li>
+      <li className={styles.nav__list__item}>
+        <Link href={`profile`}>
+          <a>profile</a>
+        </Link>
+      </li>
     </ul>
   );
 };

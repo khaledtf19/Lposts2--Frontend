@@ -1,6 +1,17 @@
+@use "../../styles/_mixins" as mixins;
+
 .from__container {
   display: flex;
   width: 100%;
   padding: 1rem;
   gap: 10px;
+}
+
+@include mixins.desktop() {
+  .from__container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 30rem;
+  }
 }
