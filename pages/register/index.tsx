@@ -1,12 +1,20 @@
-import React from "react";
-import RegisterForm from "../../components/Form/RegisterForm/RegisterForm";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import type { NextPage } from "next";
 
-function Register() {
+const DynamicRegisterForm = dynamic(
+  () => import("../../components/Form/RegisterForm/RegisterForm"),
+  {
+    suspense: true,
+  }
+);
+
+const Register: NextPage = () => {
   return (
-    <>
-      <RegisterForm />
-    </>
+    <Suspense fallback={`Loading...`}>
+      <DynamicRegisterForm />
+    </Suspense>
   );
-}
+};
 
 export default Register;

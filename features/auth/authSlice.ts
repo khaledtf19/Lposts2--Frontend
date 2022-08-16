@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AuthState } from "../../interfaces/reduxInterface";
+import { AuthState } from "../../interfaces/utilsInterfaces";
 import type { RootState } from "../store/configureStore";
 
 const initialState: AuthState = { data: null, loading: false, error: "" };
@@ -14,6 +14,7 @@ export const fetchUserData = createAsyncThunk(
           `Bearer ${JSON.parse(
             localStorage.getItem("Lposts2__token") || ""
           )}` || "",
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
@@ -30,7 +31,6 @@ export const authSlice = createSlice({
     builder.addCase(fetchUserData.pending, (state) => {
       state.loading = true;
       state.error = "";
-      state.data = null;
     });
     builder.addCase(fetchUserData.fulfilled, (state, action) => {
       state.loading = false;

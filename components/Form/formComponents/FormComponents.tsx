@@ -1,10 +1,12 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   FormInputProps,
   FormHeaderProps,
   FormSubmitBtnProps,
+  FormAvatarInputProps,
 } from "./FormComponentsInterfaces";
 import style from "./FormComponents.module.scss";
+import Image from "next/image";
 
 export const FormInput: FC<FormInputProps> = ({
   name,
@@ -44,5 +46,41 @@ export const FormSubmitBtn: FC<FormSubmitBtnProps> = ({ text }) => {
     <button type="submit" className={style.btn}>
       {text}
     </button>
+  );
+};
+
+export const FormAvatarInput: FC<FormAvatarInputProps> = ({
+  name,
+  label,
+  type,
+  placeholder,
+  register,
+  errorMessage,
+}) => {
+  const [avatar, setAvatar] = useState("");
+
+  return (
+    <div className={style.input__container}>
+      <div className={style.avatar__container}>
+        <img
+          src={`https://avatars.dicebear.com/api/bottts/:${avatar}.svg`}
+          alt={`${avatar}`}
+        />
+      </div>
+      <label className={style.label} htmlFor="avatar">
+        Avatar:
+      </label>
+      <input
+        className={style.input}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        {...register}
+        onChange={(e) => {
+          setAvatar(e.target.value);
+        }}
+      />
+      {errorMessage && <p className={style.error}>{errorMessage}</p>}
+    </div>
   );
 };

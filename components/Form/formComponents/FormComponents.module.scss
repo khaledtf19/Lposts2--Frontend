@@ -3,7 +3,9 @@
 .input__container {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
+
 .input {
   padding: 0.3rem;
   font-size: 1.1rem;
@@ -39,11 +41,26 @@
   }
 }
 
+.avatar__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100px;
+  background-color: var(--color-bg-dark);
+  border-radius: 99999px;
+}
+
 @include mixins.desktop() {
   .input {
-    padding: 0.5rem;
+    font-size: 1rem;
+    padding: 0.3rem;
   }
   .btn {
-    padding: 0.8rem;
+    padding: 0.5rem;
+  }
+  .header__container {
+    font-size: 1.1rem;
   }
 }

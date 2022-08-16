@@ -1,6 +1,7 @@
+import type { NextPage } from "next";
 import ProtectedPage from "../../components/protectedPage/ProtectedPage";
 
-const Profile = () => {
+const Profile: NextPage = () => {
   return <ProtectedPage>index</ProtectedPage>;
 };
 

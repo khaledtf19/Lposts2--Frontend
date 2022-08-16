@@ -1,12 +1,26 @@
 import Link from "next/link";
 import React from "react";
+import { UseGetUser } from "../../hooks/authHooks";
 import styles from "./Navbar.module.scss";
 
-export const Logged = () => {
-  return <div>logged</div>;
+export const NavLoggedIn = () => {
+  return (
+    <ul className={styles.nav__list}>
+      <li className={styles.nav__list__item}>
+        <Link href={`/`}>
+          <a>Home</a>
+        </Link>
+      </li>
+      <li className={styles.nav__list__item}>
+        <Link href={`profile`}>
+          <a>profile</a>
+        </Link>
+      </li>
+    </ul>
+  );
 };
 
-export const NotLogged = () => {
+export const NavNotLogged = () => {
   return (
     <ul className={styles.nav__list}>
       <li className={styles.nav__list__item}>
@@ -29,10 +43,11 @@ export const NotLogged = () => {
 };
 
 function Navbar() {
+  const { data } = UseGetUser();
   return (
-    <div className={styles.nav__container}>
-      <NotLogged />
-    </div>
+    <nav className={styles.nav__container}>
+      {data ? <NavLoggedIn /> : <NavNotLogged />}
+    </nav>
   );
 }
 

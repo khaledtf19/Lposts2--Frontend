@@ -1,7 +1,7 @@
-import React from "react";
+import type { NextPage } from "next";
 
-function User() {
+const User: NextPage = () => {
   return <div>User</div>;
-}
+};
 
 export default User;

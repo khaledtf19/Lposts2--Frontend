@@ -7,13 +7,15 @@ import {
   FormInput,
   FormHeader,
   FormSubmitBtn,
+  FormAvatarInput,
 } from "../formComponents/FormComponents";
 
 import utilsStyles from "../../../styles/utils.module.scss";
 import { RegisterInputs } from "./RegisterFormInterface";
 
 const registerSchema = yup.object().shape({
-  name: yup.string().min(2).required("Name is required"),
+  avatar: yup.string().min(1).max(50).required("Avatar is required"),
+  name: yup.string().min(2).max(50).required("Name is required"),
   email: yup.string().email().required("Email is required"),
   password: yup.string().min(8).required("Password is required"),
   confirmPassword: yup
@@ -46,6 +48,14 @@ function RegisterForm() {
     <FormContainer>
       <form className={utilsStyles.form} onSubmit={handleSubmit(onSubmit)}>
         <FormHeader text="Register" />
+        <FormAvatarInput
+          name="avatar"
+          label=":"
+          type="text"
+          placeholder="you can Change your avatar"
+          register={register("avatar")}
+          errorMessage={errors.avatar?.message}
+        />
         <FormInput
           name="name"
           label="Name:"
