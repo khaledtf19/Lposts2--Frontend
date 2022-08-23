@@ -1,21 +1,27 @@
 import { FC } from "react";
-import {
-  PostContentProps,
-  UserAvatarProps,
-  UserInfoProps,
-} from "./PostComponentsInterface";
+import { PostContentProps, UserInfoProps } from "./PostComponentsInterface";
 
 import styles from "./PostComponents.module.scss";
+import UserAvatar from "../../userAvatar/UserAvatar";
 
-export const UserInfo: FC<UserInfoProps> = ({ name, email }) => {
-  return <div className={styles.userInfo__component}></div>;
+export const UserInfo: FC<UserInfoProps> = ({ name, avatar }) => {
+  return (
+    <div className={styles.userInfo__component}>
+      <div className={styles.userInfo__avatar}>
+        <UserAvatar avatar={avatar} />
+      </div>
+      <div className={styles.userInfo}>
+        <p>{name}</p>
+      </div>
+    </div>
+  );
 };
 
 export const PostContent: FC<PostContentProps> = ({ postContent }) => {
   return (
     <p
       className={
-        postContent.length <= 30
+        postContent.length <= 50
           ? styles.content__component
           : styles.content__component__long
       }
@@ -25,16 +31,11 @@ export const PostContent: FC<PostContentProps> = ({ postContent }) => {
   );
 };
 
-export const AvatarPost: FC<UserAvatarProps> = ({ avatar }) => {
-  return (
-    <img
-      className={styles.avatar__component}
-      src={`https://avatars.dicebear.com/api/bottts/:${avatar}.svg`}
-      alt={`${avatar}`}
-    />
-  );
-};
-
 export const PostActions = () => {
-  return <div className={styles.actions__component}></div>;
+  return (
+    <div className={styles.actions__component}>
+      <div>Like</div>
+      <div>Comments</div>
+    </div>
+  );
 };

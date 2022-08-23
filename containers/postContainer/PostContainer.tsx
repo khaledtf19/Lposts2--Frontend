@@ -1,5 +1,6 @@
 import { FC } from "react";
 import {
+  PostActions,
   PostContent,
   UserInfo,
 } from "../../components/post/postComponents/PostComponents";
@@ -13,12 +14,14 @@ const PostContainer: FC<PostContainerProps> = ({ post }) => {
     <Container>
       <div className={styles.container}>
         <div className={styles.userInfo__container}>
-          <UserInfo name={post.owner.name} email={post.owner.email} />
+          <UserInfo name={post.owner.name} avatar={post.owner.avatar} />
         </div>
         <div className={styles.postContent__container}>
           <PostContent postContent={post.postContent} />
         </div>
-        <div className={styles.actions__container}></div>
+        <div className={styles.actions__container}>
+          <PostActions />
+        </div>
       </div>
     </Container>
   );

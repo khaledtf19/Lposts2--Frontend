@@ -6,17 +6,22 @@ export const useGetPosts = () => {
 
   const getPosts = async () => {
     setLoading(true);
-    const res = await fetch("http://localhost:3000/posts", {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(
-          localStorage.getItem("Lposts2__token") || ""
-        )}`,
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-    });
-    const data = await res.json();
-    setPosts(data);
+    try {
+      const res = await fetch("http://localhost:3000/posts", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("Lposts2__token") || ""
+          )}`,
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      });
+      const data = await res.json();
+      setPosts(data);
+    } catch (err) {
+      console.log(err);
+    }
+
     setLoading(false);
   };
 

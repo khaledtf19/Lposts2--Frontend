@@ -6,7 +6,7 @@ import ProtectedPage from "../components/protectedPage/ProtectedPage";
 import { useGetPosts } from "../hooks/fetchHooks";
 
 const DynamicViewPosts = dynamic(
-  () => import("../components/post/viewPosts/ViewPosts"),
+  () => import("../components/post/viewManyPosts/ViewManyPosts"),
   {
     suspense: true,
   }
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
 
   return (
     <ProtectedPage>
-      <Suspense fallback={`...Loading...`}>
+      <Suspense fallback={`Loading...`}>
         <DynamicViewPosts posts={posts} loading={loading} />
       </Suspense>
     </ProtectedPage>

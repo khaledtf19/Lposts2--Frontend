@@ -1,3 +1,22 @@
+.userInfo__component {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+
+  .userInfo__avatar {
+    width: 100%;
+    max-width: 50px;
+  }
+}
+
+.actions__component {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .content__component {
   font-size: var(--font-size-big);
 }

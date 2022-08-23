@@ -2,12 +2,14 @@ import { FC } from "react";
 
 import PostContainer from "../../../containers/postContainer/PostContainer";
 import { ViewPostsProps } from "../../../interfaces/utilsInterfaces";
+import CreatePost from "../createPost/CreatePost";
 
-import styles from "./ViewPosts.module.scss";
+import styles from "./ViewManyPosts.module.scss";
 
-const ViewPosts: FC<ViewPostsProps> = ({ posts, loading }) => {
+const ViewManyPosts: FC<ViewPostsProps> = ({ posts, loading }) => {
   return (
     <div className={styles.posts__container}>
+      <CreatePost />
       {posts.map((post) => (
         <PostContainer key={post._id} post={post} />
       ))}
@@ -15,4 +17,4 @@ const ViewPosts: FC<ViewPostsProps> = ({ posts, loading }) => {
   );
 };
 
-export default ViewPosts;
+export default ViewManyPosts;

@@ -3,7 +3,7 @@ export interface CounterState {
 }
 
 export interface AuthState {
-  data: { _id: string; email: string; name: string } | null;
+  data: { _id: string; email: string; name: string; avatar: string } | null;
   loading: boolean;
   error: string | undefined;
 }
@@ -11,7 +11,7 @@ export interface AuthState {
 export interface User {
   _id: string;
   name: string;
-  email: string;
+  avatar: string;
 }
 export interface Post {
   _id: string;
@@ -37,4 +37,8 @@ export interface PostContainerProps {
 export interface ViewPostsProps {
   posts: Post[];
   loading: boolean;
+}
+
+export interface UserAvatarProps {
+  avatar?: string;
 }

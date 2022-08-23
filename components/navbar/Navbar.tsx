@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { UseGetUser } from "../../hooks/authHooks";
+import { UseGetUserDispatch } from "../../hooks/authHooks";
 import styles from "./Navbar.module.scss";
 
 export const NavLoggedIn = () => {
@@ -43,7 +43,7 @@ export const NavNotLogged = () => {
 };
 
 function Navbar() {
-  const { data } = UseGetUser();
+  const { data } = UseGetUserDispatch();
   return (
     <nav className={styles.nav__container}>
       {data ? <NavLoggedIn /> : <NavNotLogged />}

@@ -62,9 +62,11 @@ export const FormAvatarInput: FC<FormAvatarInputProps> = ({
   return (
     <div className={style.input__container}>
       <div className={style.avatar__container}>
-        <img
+        <Image
           src={`https://avatars.dicebear.com/api/bottts/:${avatar}.svg`}
           alt={`${avatar}`}
+          width={100}
+          height={100}
         />
       </div>
       <label className={style.label} htmlFor="avatar">
