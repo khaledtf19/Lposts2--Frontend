@@ -1,0 +1,13 @@
+.DropBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(57, 55, 72, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}

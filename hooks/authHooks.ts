@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { fetchUserData } from "../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 
-export const UseGetUserDispatch = () => {
+export const UseGetUserWithDispatch = () => {
   const { data, loading, error } = useAppSelector(
     (state) => state.rootReducer.auth
   );

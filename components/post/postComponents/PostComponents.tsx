@@ -8,7 +8,7 @@ export const UserInfo: FC<UserInfoProps> = ({ name, avatar }) => {
   return (
     <div className={styles.userInfo__component}>
       <div className={styles.userInfo__avatar}>
-        <UserAvatar avatar={avatar} />
+        <UserAvatar avatar={avatar} width={35} height={35} />
       </div>
       <div className={styles.userInfo}>
         <p>{name}</p>

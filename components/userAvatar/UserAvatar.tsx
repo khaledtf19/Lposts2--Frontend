@@ -5,14 +5,14 @@ import { UserAvatarProps } from "../../interfaces/utilsInterfaces";
 
 import styles from "./UserAvatar.module.scss";
 
-const UserAvatar: FC<UserAvatarProps> = ({ avatar }) => {
+const UserAvatar: FC<UserAvatarProps> = ({ avatar, width, height }) => {
   return (
     <Image
       className={styles.avatar__component}
       src={`https://avatars.dicebear.com/api/bottts/:${avatar}.svg`}
       alt={`${avatar}`}
-      width={50}
-      height={50}
+      width={width ? width : 35}
+      height={height ? height : 35}
     />
   );
 };

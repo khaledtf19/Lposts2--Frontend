@@ -1,3 +1,5 @@
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
 export interface CounterState {
   value: number;
 }
@@ -41,4 +43,16 @@ export interface ViewPostsProps {
 
 export interface UserAvatarProps {
   avatar?: string;
+  width?: number;
+  height?: number;
+}
+
+export interface BackDropProps {
+  children: ReactNode;
+  onClick: Function;
+}
+
+export interface CreatePostPopupProps {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
