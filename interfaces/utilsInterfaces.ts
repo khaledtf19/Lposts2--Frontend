@@ -56,3 +56,15 @@ export interface CreatePostPopupProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface ButtonProps {
+  text: string;
+  onClick: Function;
+}
+export interface TextAreaProps {
+  value: string;
+  onChange: Function;
+  min: number;
+  max: number;
+  placeholder: string;
+}
