@@ -14,7 +14,9 @@ export interface User {
   _id: string;
   name: string;
   avatar: string;
+  email: string;
 }
+
 export interface Post {
   _id: string;
   postContent: string;
@@ -25,6 +27,7 @@ export interface Post {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface Comment {
   _id: string;
   commentContent: string;
@@ -38,7 +41,6 @@ export interface PostContainerProps {
 
 export interface ViewPostsProps {
   posts: Post[];
-  loading: boolean;
 }
 
 export interface UserAvatarProps {
@@ -67,4 +69,8 @@ export interface TextAreaProps {
   min: number;
   max: number;
   placeholder: string;
+}
+
+export interface CreateNewPost {
+  postContent: string;
 }

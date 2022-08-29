@@ -1,27 +1,25 @@
-import dynamic from "next/dynamic";
-import type { NextPage } from "next";
-import { useEffect, Suspense } from "react";
+import type { GetServerSideProps, NextPage } from "next";
 
-import ProtectedPage from "../components/protectedPage/ProtectedPage";
-import { useGetPosts } from "../hooks/fetchHooks";
+import { Post } from "../interfaces/utilsInterfaces";
+import ViewManyPosts from "../components/post/viewManyPosts/ViewManyPosts";
 
-const DynamicViewPosts = dynamic(
-  () => import("../components/post/viewManyPosts/ViewManyPosts"),
-  {
-    suspense: true,
-  }
-);
-
-const Home: NextPage = () => {
-  const { posts, loading } = useGetPosts();
-
-  return (
-    <ProtectedPage>
-      <Suspense fallback={`Loading...`}>
-        <DynamicViewPosts posts={posts} loading={loading} />
-      </Suspense>
-    </ProtectedPage>
-  );
+const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
+  return <ViewManyPosts posts={posts} />;
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch(`http://localhost:3000/posts`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  });
+
+  const posts = await res.json();
+
+  return {
+    props: { posts },
+  };
+};

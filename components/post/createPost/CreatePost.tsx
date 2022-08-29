@@ -9,7 +9,7 @@ import styles from "./CreatePost.module.scss";
 
 const CreatePost: FC = () => {
   const [open, setOpen] = useState(false);
-  const { data, loading, error } = useGetUser();
+  const { data } = useGetUser();
 
   return (
     <>

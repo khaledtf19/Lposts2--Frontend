@@ -6,7 +6,7 @@ import CreatePost from "../createPost/CreatePost";
 
 import styles from "./ViewManyPosts.module.scss";
 
-const ViewManyPosts: FC<ViewPostsProps> = ({ posts, loading }) => {
+const ViewManyPosts: FC<ViewPostsProps> = ({ posts }) => {
   return (
     <div className={styles.posts__container}>
       <CreatePost />

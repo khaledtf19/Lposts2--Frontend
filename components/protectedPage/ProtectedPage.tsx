@@ -1,21 +1,22 @@
 import { FC, PropsWithChildren } from "react";
 import { useRouter } from "next/router";
 
-import { UseGetUserWithDispatch } from "../../hooks/authHooks";
+import { useGetUser } from "../../hooks/authHooks";
 
 const ProtectedPage: FC<PropsWithChildren> = ({ children }) => {
-  const { data, loading, error } = UseGetUserWithDispatch();
+  const { data, isLoading } = useGetUser();
   const router = useRouter();
 
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
-  if (error) {
-    router.push("/login");
-    return <div>Error</div>;
+
+  if (data) {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  router.push("/login");
+  return <div>Error</div>;
 };
 
 export default ProtectedPage;

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import React from "react";
-import { UseGetUserWithDispatch } from "../../hooks/authHooks";
+import { useGetUser } from "../../hooks/authHooks";
 import styles from "./Navbar.module.scss";
 
 export const NavLoggedIn = () => {
@@ -38,12 +37,18 @@ export const NavNotLogged = () => {
           <a>profile</a>
         </Link>
       </li>
+      <li className={styles.nav__list__item}>
+        <Link href={`/`}>
+          <a>Home</a>
+        </Link>
+      </li>
     </ul>
   );
 };
 
 function Navbar() {
-  const { data } = UseGetUserWithDispatch();
+  const { data } = useGetUser();
+
   return (
     <nav className={styles.nav__container}>
       {data ? <NavLoggedIn /> : <NavNotLogged />}

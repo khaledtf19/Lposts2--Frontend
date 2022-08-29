@@ -1,38 +1,7 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-export const useGetPosts = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const getPosts = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("http://localhost:3000/posts", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem("Lposts2__token") || ""
-          )}`,
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      });
-      const data = await res.json();
-      setPosts(data);
-    } catch (err) {
-      console.log(err);
-    }
-
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  return { posts, loading };
-};
-
-export const getPostById = (postId: string) => {
+export const useGetPostById = (postId: string) => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +28,7 @@ export const getPostById = (postId: string) => {
   return { post, loading };
 };
 
-export const getPostsByUserId = (userId: string) => {
+export const useGetPostsByUserId = (userId: string) => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -67,9 +36,6 @@ export const getPostsByUserId = (userId: string) => {
     setLoading(true);
     const res = await fetch(`http://localhost:3000/posts/user/${userId}`, {
       headers: {
-        Authorization: `Bearer ${JSON.parse(
-          localStorage.getItem("Lposts2__token") || ""
-        )}`,
         "Content-Type": "application/json",
       },
       method: "GET",

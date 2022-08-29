@@ -12,8 +12,7 @@ import {
 
 import utilsStyles from "../../../styles/utils.module.scss";
 import { LoginInputs } from "./LoginFormInterface";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
-import { fetchUserData } from "../../../features/auth/authSlice";
+import { useGetUser } from "../../../hooks/authHooks";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
@@ -21,8 +20,8 @@ const loginSchema = yup.object().shape({
 });
 
 const LoginForm = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const { refetch } = useGetUser();
 
   const {
     register,
@@ -44,7 +43,7 @@ const LoginForm = () => {
         "Lposts2__token",
         JSON.stringify(fData.data.access_token)
       );
-      dispatch(fetchUserData()).then(() => router.push("/profile"));
+      refetch().then(() => router.push("/profile"));
     }
     console.log(fData);
   };
