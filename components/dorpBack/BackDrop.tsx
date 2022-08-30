@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Container from "../../containers/container/Container";
-import { BackDropProps } from "../../interfaces/utilsInterfaces";
+import { BackDropProps } from "../../interfaces/utils.Interface";
 import styles from "./BackDrop.module.scss";
 
 const BackDrop: FC<BackDropProps> = ({ children, onClick }) => {

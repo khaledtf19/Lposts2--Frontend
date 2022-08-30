@@ -3,10 +3,18 @@ import { PostContentProps, UserInfoProps } from "./PostComponentsInterface";
 
 import styles from "./PostComponents.module.scss";
 import UserAvatar from "../../userAvatar/UserAvatar";
+import { useRouter } from "next/router";
 
-export const UserInfo: FC<UserInfoProps> = ({ name, avatar }) => {
+export const UserInfo: FC<UserInfoProps> = ({ name, avatar, userId }) => {
+  const router = useRouter();
+
   return (
-    <div className={styles.userInfo__component}>
+    <div
+      className={styles.userInfo__component}
+      onClick={() => {
+        router.push(`/user/${userId}`);
+      }}
+    >
       <div className={styles.userInfo__avatar}>
         <UserAvatar avatar={avatar} width={35} height={35} />
       </div>
@@ -31,11 +39,19 @@ export const PostContent: FC<PostContentProps> = ({ postContent }) => {
   );
 };
 
-export const PostActions = () => {
+export const PostActions: FC<{ postId: string }> = ({ postId }) => {
+  const router = useRouter();
   return (
     <div className={styles.actions__component}>
-      <div>Like</div>
-      <div>Comments</div>
+      <div className={styles.like}>Like</div>
+      <div
+        className={styles.comments}
+        onClick={() => {
+          router.push(`/post/${postId}`);
+        }}
+      >
+        Comments
+      </div>
     </div>
   );
 };

@@ -2,27 +2,43 @@ import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import axios from "axios";
 
-import { CreatePostPopupProps } from "../../../interfaces/utilsInterfaces";
+import {
+  CreatePostPopupProps,
+  Post,
+} from "../../../interfaces/utils.Interface";
 import BackDrop from "../../dorpBack/BackDrop";
 import { TextArea, Button } from "../../utilities/Utilities";
 
 import styles from "./CreatePostPopup.module.scss";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { addError, openError } from "../../../features/error/errorSlice";
+import { useRouter } from "next/router";
 
 const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
   const [createPost, setCreatePost] = useState("");
-  const mutation = useMutation(() => {
-    return axios
-      .post("http://localhost:3000/posts", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem("Lposts2__token") || ""
-          )}`,
-        },
-        method: "POST",
-        body: { postContent: createPost },
-      })
-      .then((res) => res);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const mutation = useMutation(async () => {
+    try {
+      const res = await axios.post<Post>(
+        "http://localhost:3000/posts",
+        { postContent: createPost },
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("Lposts2__token") || ""
+            )}`,
+          },
+        }
+      );
+      console.log(res.data);
+      router.push(`post/${res.data._id}`);
+      return res.data;
+    } catch (err: any) {
+      console.log(err.response.data.message);
+      dispatch(addError(err.response.data.message));
+    }
   });
 
   return (
@@ -44,7 +60,7 @@ const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
           <Button
             text="create"
             onClick={() => {
-              mutation.mutate();
+              if (createPost.length > 1) mutation.mutate();
             }}
           />
         </div>

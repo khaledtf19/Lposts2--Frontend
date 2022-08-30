@@ -1,24 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import { User } from "../interfaces/utilsInterfaces";
+import axios from "axios";
+
+import { User } from "../interfaces/utils.Interface";
 
 export const useGetUser = () => {
-  return useQuery(["user"], (): Promise<User | null> => {
-    return fetch("http://localhost:3000/users/me", {
-      method: "GET",
-      headers: {
-        Authorization:
-          `Bearer ${JSON.parse(
-            localStorage.getItem("Lposts2__token") || ""
-          )}` || "",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message) {
-          return "";
+  return useQuery(["user"], async (): Promise<User | undefined> => {
+    try {
+      const res = await axios.get<{ data: User }>(
+        "http://localhost:3000/users/me",
+        {
+          headers: {
+            Authorization:
+              `Bearer ${JSON.parse(
+                localStorage.getItem("Lposts2__token") || ""
+              )}` || "",
+            "Content-Type": "application/json",
+          },
         }
-        return data.data;
-      });
+      );
+      const data = res;
+      return data.data.data;
+    } catch (error) {
+      return undefined;
+    }
   });
 };

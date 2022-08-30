@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import PostContainer from "../../../containers/postContainer/PostContainer";
-import { ViewPostsProps } from "../../../interfaces/utilsInterfaces";
+import { ViewPostsProps } from "../../../interfaces/utils.Interface";
 import CreatePost from "../createPost/CreatePost";
 
 import styles from "./ViewManyPosts.module.scss";

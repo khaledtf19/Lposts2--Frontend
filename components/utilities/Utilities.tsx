@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ButtonProps, TextAreaProps } from "../../interfaces/utilsInterfaces";
+import { ButtonProps, TextAreaProps } from "../../interfaces/utils.Interface";
 
 import styles from "./Utilities.module.scss";
 

@@ -1,7 +1,8 @@
 import type { GetServerSideProps, NextPage } from "next";
 
-import { Post } from "../interfaces/utilsInterfaces";
+import { Post } from "../interfaces/utils.Interface";
 import ViewManyPosts from "../components/post/viewManyPosts/ViewManyPosts";
+import axios from "axios";
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   return <ViewManyPosts posts={posts} />;
@@ -10,14 +11,9 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`http://localhost:3000/posts`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "GET",
-  });
+  const res = await axios.get<Post[]>(`http://localhost:3000/posts`);
 
-  const posts = await res.json();
+  const posts = res.data;
 
   return {
     props: { posts },

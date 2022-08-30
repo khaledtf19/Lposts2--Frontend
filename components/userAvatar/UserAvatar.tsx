@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 
-import { UserAvatarProps } from "../../interfaces/utilsInterfaces";
+import { UserAvatarProps } from "../../interfaces/utils.Interface";
 
 import styles from "./UserAvatar.module.scss";
 
