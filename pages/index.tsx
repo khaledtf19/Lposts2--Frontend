@@ -11,7 +11,9 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get<Post[]>(`http://localhost:3000/posts`);
+  const res = await axios.get<Post[]>(
+    `https://khaledtf199.up.railway.app/posts`
+  );
 
   const posts = res.data;
 

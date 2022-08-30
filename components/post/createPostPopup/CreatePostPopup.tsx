@@ -22,7 +22,7 @@ const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
   const mutation = useMutation(async () => {
     try {
       const res = await axios.post<Post>(
-        "http://localhost:3000/posts",
+        "https://khaledtf199.up.railway.app/posts",
         { postContent: createPost },
         {
           headers: {

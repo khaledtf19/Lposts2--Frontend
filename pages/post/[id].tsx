@@ -10,7 +10,9 @@ export default Post;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
-  const res = await axios.get<Post>(`http://localhost:3000/posts/${id}`);
+  const res = await axios.get<Post>(
+    `https://khaledtf199.up.railway.app/posts/${id}`
+  );
 
   const data = res.data;
 

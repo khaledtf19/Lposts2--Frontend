@@ -35,7 +35,7 @@ function RegisterForm() {
   });
 
   const onSubmit = async (data: RegisterInputs) => {
-    const response = await fetch("http://localhost:3000/users", {
+    const response = await fetch("https://khaledtf199.up.railway.app/users", {
       body: JSON.stringify(data),
       method: "POST",
       headers: { "Content-Type": "application/json" },

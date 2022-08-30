@@ -7,7 +7,7 @@ export const useGetUser = () => {
   return useQuery(["user"], async (): Promise<User | undefined> => {
     try {
       const res = await axios.get<{ data: User }>(
-        "http://localhost:3000/users/me",
+        "https://khaledtf199.up.railway.app/users/me",
         {
           headers: {
             Authorization:
