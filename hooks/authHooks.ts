@@ -7,7 +7,7 @@ export const useGetUser = () => {
   return useQuery(["user"], async (): Promise<User | undefined> => {
     try {
       const res = await axios.get<{ data: User }>(
-        "https://khaledtf199.up.railway.app/users/me",
+        "https://lposts-2.herokuapp.com/users/me",
         {
           headers: {
             Authorization:

@@ -32,14 +32,11 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginInputs) => {
-    const response = await fetch(
-      "https://khaledtf199.up.railway.app/auth/login",
-      {
-        body: JSON.stringify({ username: data.email, password: data.password }),
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const response = await fetch("https://lposts-2.herokuapp.com/auth/login", {
+      body: JSON.stringify({ username: data.email, password: data.password }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
     const fData = await response.json();
     if (fData.data.access_token) {
       localStorage.setItem(

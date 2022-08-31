@@ -35,7 +35,7 @@ function RegisterForm() {
   });
 
   const onSubmit = async (data: RegisterInputs) => {
-    const response = await fetch("https://khaledtf199.up.railway.app/users", {
+    const response = await fetch("https://lposts-2.herokuapp.com/users", {
       body: JSON.stringify(data),
       method: "POST",
       headers: { "Content-Type": "application/json" },

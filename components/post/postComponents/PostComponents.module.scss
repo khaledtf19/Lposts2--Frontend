@@ -4,6 +4,7 @@
   justify-content: flex-start;
   width: 100%;
   gap: 10px;
+  cursor: pointer;
 
   .userInfo__avatar {
     max-width: 50px;
@@ -14,6 +15,9 @@
 
   .userInfo {
     font-size: 1rem;
+    &:hover {
+      color: var(--color-text2);
+    }
   }
 }
 

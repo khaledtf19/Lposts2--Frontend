@@ -11,7 +11,7 @@ export default Post;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   const res = await axios.get<Post>(
-    `https://khaledtf199.up.railway.app/posts/${id}`
+    `https://lposts-2.herokuapp.com/posts/${id}`
   );
 
   const data = res.data;
