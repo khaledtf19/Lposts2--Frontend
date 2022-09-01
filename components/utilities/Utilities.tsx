@@ -1,11 +1,12 @@
-import { FC } from "react";
+import Link from "next/link";
+import { FC, PropsWithChildren } from "react";
 import { ButtonProps, TextAreaProps } from "../../interfaces/utils.Interface";
 
 import styles from "./Utilities.module.scss";
 
-export const Button: FC<ButtonProps> = ({ text, onClick }) => {
+export const Button: FC<ButtonProps> = ({ text, onClick, type }) => {
   return (
-    <button onClick={() => onClick()} className={styles.button}>
+    <button onClick={() => onClick()} className={styles.button} type={type}>
       {text}
     </button>
   );

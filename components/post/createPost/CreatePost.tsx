@@ -13,14 +13,16 @@ const CreatePost: FC = () => {
 
   return (
     <>
-      <Container>
-        <div className={styles.container}>
-          <UserAvatar avatar={data?.avatar} />
-          <div className={styles.createPost} onClick={() => setOpen(true)}>
-            <p>Create a post...</p>
+      {data && (
+        <Container>
+          <div className={styles.container}>
+            <UserAvatar avatar={data?.avatar} />
+            <div className={styles.createPost} onClick={() => setOpen(true)}>
+              <p>Create a post...</p>
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      )}
       <>{open && <CreatePostPopup open={open} setOpen={setOpen} />}</>
     </>
   );

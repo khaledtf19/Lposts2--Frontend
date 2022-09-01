@@ -1,11 +1,12 @@
-import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 
 const DynamicRegisterForm = dynamic(
   () => import("../../components/Form/RegisterForm/RegisterForm"),
   {
     suspense: true,
+    ssr: true,
   }
 );
 

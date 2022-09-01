@@ -1,4 +1,10 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+} from "react";
 
 export interface CounterState {
   value: number;
@@ -23,15 +29,20 @@ export interface Post {
   owner: User;
   likes: number;
   whoLike: string[];
-  comments: string[];
+  comments: string[] | Comment[];
   createdAt: string;
   updatedAt: string;
 }
 
 export interface Comment {
   _id: string;
+  postId: string;
   commentContent: string;
-  owner: string;
+  owner: User;
+  likes: number;
+  createdAt: string;
+  updatedAt: string;
+  whoLike: string[];
 }
 
 export interface PostContainerProps {
@@ -62,7 +73,9 @@ export interface CreatePostPopupProps {
 export interface ButtonProps {
   text: string;
   onClick: Function;
+  type?: "button" | "submit" | "reset" | undefined;
 }
+
 export interface TextAreaProps {
   value: string;
   onChange: Function;
@@ -70,7 +83,6 @@ export interface TextAreaProps {
   max: number;
   placeholder: string;
 }
-
 export interface CreateNewPost {
   postContent: string;
 }

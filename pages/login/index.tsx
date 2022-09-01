@@ -1,10 +1,20 @@
 import type { NextPage } from "next";
-import LoginForm from "../../components/Form/LoginForm/LoginForm";
+import dynamic from "next/dynamic";
+import { Suspense, useEffect } from "react";
+
+import { useGetUser } from "../../hooks/authHooks";
+
+export const DynamicLoginForm = dynamic(
+  () => import("../../components/Form/LoginForm/LoginForm"),
+  { suspense: true, ssr: true }
+);
 
 const Login: NextPage = () => {
   return (
     <>
-      <LoginForm />
+      <Suspense fallback={"loading..."}>
+        <DynamicLoginForm />
+      </Suspense>
     </>
   );
 };

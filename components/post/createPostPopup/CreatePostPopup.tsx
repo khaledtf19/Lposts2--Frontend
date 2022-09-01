@@ -11,7 +11,7 @@ import { TextArea, Button } from "../../utilities/Utilities";
 
 import styles from "./CreatePostPopup.module.scss";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
-import { addError, openError } from "../../../features/error/errorSlice";
+import { addError } from "../../../features/error/errorSlice";
 import { useRouter } from "next/router";
 
 const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {

@@ -1,8 +1,15 @@
+import { FC } from "react";
+import CommentContainer from "../../../containers/commentContainer/CommentContainer";
+import Container from "../../../containers/container/Container";
 
-const ViewManyComments = () => {
+const ViewManyComments: FC<{ comments: any[] }> = ({ comments }) => {
   return (
-    <div>ViewManyComments</div>
-  )
-}
+    <Container>
+      {comments.map((comment, index) => (
+        <CommentContainer key={index} comment={comment} />
+      ))}
+    </Container>
+  );
+};
 
-export default ViewManyComments
+export default ViewManyComments;

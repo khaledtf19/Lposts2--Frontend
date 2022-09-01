@@ -1,9 +1,9 @@
+import axios from "axios";
 import type { GetServerSideProps, NextPage } from "next";
 
 import { Post } from "../interfaces/utils.Interface";
-import ViewManyPosts from "../components/post/viewManyPosts/ViewManyPosts";
-import axios from "axios";
 import CreatePost from "../components/post/createPost/CreatePost";
+import ViewManyPosts from "../components/post/viewManyPosts/ViewManyPosts";
 
 import styles from "../styles/Home.module.scss";
 
@@ -11,8 +11,7 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   return (
     <div className={styles.container}>
       <CreatePost />
-
-      <ViewManyPosts posts={posts} />
+      {posts ? <ViewManyPosts posts={posts} /> : <h1>Error</h1>}
     </div>
   );
 };
@@ -20,11 +19,17 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get<Post[]>(`https://lposts-2.herokuapp.com/posts`);
+  try {
+    const res = await axios.get<Post[]>(`https://lposts-2.herokuapp.com/posts`);
 
-  const posts = res.data;
+    const posts = res.data;
 
-  return {
-    props: { posts },
-  };
+    return {
+      props: { posts },
+    };
+  } catch (err) {
+    return {
+      props: { posts: null },
+    };
+  }
 };
