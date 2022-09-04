@@ -3,6 +3,7 @@ import { useGetUser } from "../../hooks/authHooks";
 import styles from "./Navbar.module.scss";
 
 export const NavLoggedIn = () => {
+  const { data } = useGetUser();
   return (
     <ul className={styles.nav__list}>
       <li className={styles.nav__list__item}>
@@ -11,7 +12,7 @@ export const NavLoggedIn = () => {
         </Link>
       </li>
       <li className={styles.nav__list__item}>
-        <Link href={`/profile`}>
+        <Link href={`/user/${data?._id}`}>
           <a>profile</a>
         </Link>
       </li>
@@ -38,11 +39,6 @@ export const NavNotLogged = () => {
       <li className={styles.nav__list__item}>
         <Link href={`/register`}>
           <a>register</a>
-        </Link>
-      </li>
-      <li className={styles.nav__list__item}>
-        <Link href={`/profile`}>
-          <a>profile</a>
         </Link>
       </li>
       <li className={styles.nav__list__item}>

@@ -13,6 +13,8 @@ import {
 import utilsStyles from "../../../styles/utils.module.scss";
 import { LoginInputs } from "./LoginFormInterface";
 import { useGetUser } from "../../../hooks/authHooks";
+import axios from "axios";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
@@ -22,6 +24,7 @@ const loginSchema = yup.object().shape({
 const LoginForm = () => {
   const router = useRouter();
   const { refetch } = useGetUser();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -32,20 +35,23 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginInputs) => {
-    const response = await fetch("https://lposts-2.herokuapp.com/auth/login", {
-      body: JSON.stringify({ username: data.email, password: data.password }),
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
-    const fData = await response.json();
-    if (fData.data.access_token) {
-      localStorage.setItem(
-        "Lposts2__token",
-        JSON.stringify(fData.data.access_token)
+    try {
+      const response = await axios.post(
+        "https://lposts-2.herokuapp.com/auth/login",
+        { username: data.email, password: data.password }
       );
-      refetch().then(() => router.push("/profile"));
+      const fData = response.data;
+      if (fData.data.access_token) {
+        localStorage.setItem(
+          "Lposts2__token",
+          JSON.stringify(fData.data.access_token)
+        );
+        refetch().then(() => router.push("/"));
+      }
+      console.log(fData);
+    } catch (err: any) {
+      console.log(err.response.data.message);
     }
-    console.log(fData);
   };
 
   return (
