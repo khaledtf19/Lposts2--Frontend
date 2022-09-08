@@ -59,7 +59,7 @@ export const PostActions: FC<{
   const handleLike = useMutation(async () => {
     try {
       const res = await axios.post<{ likes: number; whoLike: string[] }>(
-        `http://localhost:3000/posts/like/${postId}`,
+        `https://lposts-2.herokuapp.com/posts/like/${postId}`,
         {},
         {
           headers: {
