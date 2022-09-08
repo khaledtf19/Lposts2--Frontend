@@ -53,7 +53,6 @@ function RegisterForm() {
         router.push("/login");
       }
     } catch (err: any) {
-      console.log(err.response.data.message);
       dispatch(addError([err.response.data.message]));
     }
   };

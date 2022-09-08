@@ -15,6 +15,7 @@ import { LoginInputs } from "./LoginFormInterface";
 import { useGetUser } from "../../../hooks/authHooks";
 import axios from "axios";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { addError } from "../../../features/error/errorSlice";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
@@ -48,9 +49,8 @@ const LoginForm = () => {
         );
         refetch().then(() => router.push("/"));
       }
-      console.log(fData);
     } catch (err: any) {
-      console.log(err.response.data.message);
+      dispatch(addError([err.response.data.message]));
     }
   };
 

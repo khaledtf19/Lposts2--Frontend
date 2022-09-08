@@ -1,0 +1,22 @@
+@use "./../../styles/_mixins" as mixins;
+
+.bar {
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 20000;
+  position: fixed;
+}
+
+.container {
+  pointer-events: none;
+}
+
+@include mixins.desktop() {
+  .bar {
+    top: 0;
+    bottom: auto;
+  }
+}

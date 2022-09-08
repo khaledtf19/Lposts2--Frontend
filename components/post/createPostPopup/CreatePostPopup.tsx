@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import axios from "axios";
 
 import {
@@ -32,11 +32,9 @@ const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
           },
         }
       );
-      console.log(res.data);
       router.push(`post/${res.data._id}`);
       return res.data;
     } catch (err: any) {
-      console.log(err.response.data.message);
       dispatch(addError(err.response.data.message));
     }
   });
@@ -61,6 +59,7 @@ const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
             text="create"
             onClick={() => {
               if (createPost.length > 1) mutation.mutate();
+              else dispatch(addError(["You can't create empty post."]));
             }}
           />
         </div>
