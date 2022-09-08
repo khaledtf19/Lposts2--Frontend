@@ -14,12 +14,12 @@ import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { addError } from "../../../features/error/errorSlice";
 import { useRouter } from "next/router";
 
-const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
+const CreatePostPopup: FC<CreatePostPopupProps> = ({ setOpen }) => {
   const [createPost, setCreatePost] = useState("");
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const mutation = useMutation(async () => {
+  const handelCreatePost = useMutation(async () => {
     try {
       const res = await axios.post<Post>(
         "https://lposts-2.herokuapp.com/posts",
@@ -58,7 +58,7 @@ const CreatePostPopup: FC<CreatePostPopupProps> = ({ open, setOpen }) => {
           <Button
             text="create"
             onClick={() => {
-              if (createPost.length > 1) mutation.mutate();
+              if (createPost.length > 1) handelCreatePost.mutate();
               else dispatch(addError(["You can't create empty post."]));
             }}
           />

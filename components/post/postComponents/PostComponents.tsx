@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { PostContentProps, UserInfoProps } from "./PostComponentsInterface";
+import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 
 import styles from "./PostComponents.module.scss";
 import UserAvatar from "../../userAvatar/UserAvatar";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { User } from "../../../interfaces/utils.Interface";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { addError } from "../../../features/error/errorSlice";
 
 export const UserInfo: FC<UserInfoProps> = ({ name, avatar, userId }) => {
   const router = useRouter();
@@ -39,11 +45,56 @@ export const PostContent: FC<PostContentProps> = ({ postContent }) => {
   );
 };
 
-export const PostActions: FC<{ postId: string }> = ({ postId }) => {
-  const router = useRouter();
+export const PostActions: FC<{
+  postId: string;
+  whoLike: string[];
+  likes: number;
+}> = ({ postId, whoLike, likes }) => {
+  const [currentLikes, setCurrentLikes] = useState(likes);
+  const [currentWhoLike, setCurrentWhoLike] = useState(whoLike);
+  const { data } = useQuery<User>(["user"]);
+
+  const dispatch = useAppDispatch();
+
+  const handleLike = useMutation(async () => {
+    try {
+      const res = await axios.post<{ likes: number; whoLike: string[] }>(
+        `http://localhost:3000/posts/like/${postId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("Lposts2__token") || ""
+            )}`,
+          },
+        }
+      );
+      const data = res.data;
+      setCurrentLikes(data.likes);
+      setCurrentWhoLike(data.whoLike);
+    } catch (err) {}
+  });
+
   return (
     <div className={styles.actions__component}>
-      <div className={styles.like}>Like</div>
+      <div
+        className={styles.like}
+        onClick={() => {
+          if (data) handleLike.mutateAsync();
+          else dispatch(addError(["Login First..."]));
+        }}
+      >
+        {data ? (
+          currentWhoLike.includes(data?._id) ? (
+            <AiFillLike />
+          ) : (
+            <AiOutlineLike />
+          )
+        ) : (
+          <AiOutlineLike />
+        )}
+        {currentLikes}
+      </div>
       <Link href={`/post/${postId}`}>
         <a className={styles.comments}>Comments</a>
       </Link>

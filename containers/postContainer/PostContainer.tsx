@@ -1,4 +1,5 @@
 import { FC } from "react";
+import ViewManyComments from "../../components/comment/viewManyComments/ViewManyComments";
 import {
   PostActions,
   PostContent,
@@ -9,7 +10,7 @@ import { PostContainerProps } from "../../interfaces/utils.Interface";
 import Container from "../container/Container";
 import styles from "./PostContainer.module.scss";
 
-const PostContainer: FC<PostContainerProps> = ({ post }) => {
+const PostContainer: FC<PostContainerProps> = ({ post, comments }) => {
   return (
     <Container>
       <div className={styles.container}>
@@ -24,9 +25,14 @@ const PostContainer: FC<PostContainerProps> = ({ post }) => {
           <PostContent postContent={post.postContent} />
         </div>
         <div className={styles.actions__container}>
-          <PostActions postId={post._id} />
+          <PostActions
+            postId={post._id}
+            whoLike={post.whoLike}
+            likes={post.likes}
+          />
         </div>
       </div>
+      {comments && <ViewManyComments comments={post.comments} />}
     </Container>
   );
 };

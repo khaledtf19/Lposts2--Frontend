@@ -47,7 +47,7 @@ export interface Comment {
 
 export interface PostContainerProps {
   post: Post;
-  comments?: Comment[];
+  comments?: boolean;
 }
 
 export interface ViewPostsProps {

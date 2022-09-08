@@ -10,8 +10,7 @@ const ViewOnePost: FC<{ post: Post }> = ({ post }) => {
   console.log(post.comments);
   return (
     <div className={styles.container}>
-      <PostContainer post={post} />
-      <ViewManyComments comments={post.comments} />
+      <PostContainer post={post} comments={true} />
     </div>
   );
 };
