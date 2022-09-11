@@ -1,10 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-} from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface CounterState {
   value: number;
@@ -27,7 +21,6 @@ export interface Post {
   _id: string;
   postContent: string;
   owner: User;
-  likes: number;
   whoLike: string[];
   comments: string[] | Comment[];
   createdAt: string;
@@ -39,7 +32,6 @@ export interface Comment {
   postId: string;
   commentContent: string;
   owner: User;
-  likes: number;
   createdAt: string;
   updatedAt: string;
   whoLike: string[];

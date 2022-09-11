@@ -1,6 +1,5 @@
 import { FC } from "react";
 import CommentContainer from "../../../containers/commentContainer/CommentContainer";
-import Container from "../../../containers/container/Container";
 
 import styles from "./ViewManyComments.module.scss";
 

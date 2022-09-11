@@ -25,11 +25,7 @@ const PostContainer: FC<PostContainerProps> = ({ post, comments }) => {
           <PostContent postContent={post.postContent} />
         </div>
         <div className={styles.actions__container}>
-          <PostActions
-            postId={post._id}
-            whoLike={post.whoLike}
-            likes={post.likes}
-          />
+          <PostActions postId={post._id} whoLike={post.whoLike} />
         </div>
       </div>
       {comments && <ViewManyComments comments={post.comments} />}

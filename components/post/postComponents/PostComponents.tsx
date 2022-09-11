@@ -48,9 +48,7 @@ export const PostContent: FC<PostContentProps> = ({ postContent }) => {
 export const PostActions: FC<{
   postId: string;
   whoLike: string[];
-  likes: number;
-}> = ({ postId, whoLike, likes }) => {
-  const [currentLikes, setCurrentLikes] = useState(likes);
+}> = ({ postId, whoLike }) => {
   const [currentWhoLike, setCurrentWhoLike] = useState(whoLike);
   const { data } = useQuery<User>(["user"]);
 
@@ -70,7 +68,6 @@ export const PostActions: FC<{
         }
       );
       const data = res.data;
-      setCurrentLikes(data.likes);
       setCurrentWhoLike(data.whoLike);
     } catch (err) {}
   });
@@ -80,7 +77,7 @@ export const PostActions: FC<{
       <div
         className={styles.like}
         onClick={() => {
-          if (data) handleLike.mutateAsync();
+          if (data) handleLike.mutate();
           else dispatch(addError(["Login First..."]));
         }}
       >
@@ -93,7 +90,7 @@ export const PostActions: FC<{
         ) : (
           <AiOutlineLike />
         )}
-        {currentLikes}
+        {currentWhoLike.length}
       </div>
       <Link href={`/post/${postId}`}>
         <a className={styles.comments}>Comments</a>
