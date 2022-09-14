@@ -1,0 +1,32 @@
+@use "../../../styles/_mixins" as mixins;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 5px 20px 15px 20px;
+  background-color: var(--color-primary);
+  position: sticky;
+  bottom: 3rem;
+}
+
+.textArea {
+  width: 100%;
+  border-radius: 10px;
+  background-color: var(--color-comment);
+  outline: none;
+  border: none;
+  padding: 10px;
+  color: white;
+  resize: none;
+  min-height: 10vh;
+  max-height: none;
+  font-size: 0.8rem;
+}
+
+@include mixins.desktop() {
+  .container {
+    bottom: 0;
+  }
+}

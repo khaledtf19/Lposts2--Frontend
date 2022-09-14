@@ -22,7 +22,7 @@ export interface Post {
   postContent: string;
   owner: User;
   whoLike: string[];
-  comments: string[] | Comment[];
+  comments: Comment[];
   createdAt: string;
   updatedAt: string;
 }
@@ -77,4 +77,20 @@ export interface TextAreaProps {
 }
 export interface CreateNewPost {
   postContent: string;
+}
+
+export enum CommentActionsTypes {
+  ADDNEWCOMMENT = "ADD",
+  REMOVECOMMENT = "REMOVE",
+}
+
+export type CommentAction =
+  | {
+      type: CommentActionsTypes.ADDNEWCOMMENT;
+      newComment: Comment;
+    }
+  | { type: CommentActionsTypes.REMOVECOMMENT; commentId: string };
+
+export interface CommentState {
+  comments: Comment[];
 }

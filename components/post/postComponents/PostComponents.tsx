@@ -13,8 +13,6 @@ import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { addError } from "../../../features/error/errorSlice";
 
 export const UserInfo: FC<UserInfoProps> = ({ name, avatar, userId }) => {
-  const router = useRouter();
-
   return (
     <div className={styles.userInfo__component}>
       <Link href={`/user/${userId}`}>
@@ -48,7 +46,8 @@ export const PostContent: FC<PostContentProps> = ({ postContent }) => {
 export const PostActions: FC<{
   postId: string;
   whoLike: string[];
-}> = ({ postId, whoLike }) => {
+  comments: number;
+}> = ({ postId, whoLike, comments }) => {
   const [currentWhoLike, setCurrentWhoLike] = useState(whoLike);
   const { data } = useQuery<User>(["user"]);
 
@@ -93,7 +92,7 @@ export const PostActions: FC<{
         {currentWhoLike.length}
       </div>
       <Link href={`/post/${postId}`}>
-        <a className={styles.comments}>Comments</a>
+        <a className={styles.comments}>Comments {comments}</a>
       </Link>
     </div>
   );
