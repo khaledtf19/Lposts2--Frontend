@@ -5,6 +5,7 @@ import {
   PostContent,
   UserInfo,
 } from "../../components/post/postComponents/PostComponents";
+import { DropDown } from "../../components/utilities/Utilities";
 
 import { PostContainerProps } from "../../interfaces/utils.Interface";
 import Container from "../container/Container";
@@ -20,6 +21,7 @@ const PostContainer: FC<PostContainerProps> = ({ post, comments }) => {
             avatar={post.owner.avatar}
             userId={post.owner._id}
           />
+          <DropDown />
         </div>
         <div className={styles.postContent__container}>
           <PostContent postContent={post.postContent} />

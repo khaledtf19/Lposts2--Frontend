@@ -1,22 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Dispatch, FC, useState } from "react";
-import { CommentAction } from "../../../interfaces/utils.Interface";
+import {
+  CommentAction,
+  CommentActionsTypes,
+} from "../../../interfaces/utils.Interface";
 
 import { IoIosCreate } from "react-icons/io";
+import { SyncLoader } from "react-spinners";
 
 import styles from "./CreateComment.module.scss";
 
 const CreateComment: FC<{
   dispatch: Dispatch<CommentAction>;
   postId: string;
-}> = () => {
+}> = ({ dispatch, postId }) => {
   const [newComment, setNewComment] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const createNewComment = useMutation(async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
-        "https://lposts-2.herokuapp.com/posts",
+        `https://lposts-2.herokuapp.com/comments/post/${postId}`,
         {
           commentContent: newComment,
         },
@@ -29,7 +35,12 @@ const CreateComment: FC<{
         }
       );
       const data = res.data;
-    } catch (err) {}
+      dispatch({ type: CommentActionsTypes.ADDNEWCOMMENT, newComment: data });
+      setNewComment("");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   });
 
   return (
@@ -39,12 +50,22 @@ const CreateComment: FC<{
         minLength={1}
         maxLength={255}
         placeholder={"Create new Comment..."}
+        value={newComment}
         onChange={(e) => {
-          setNewComment(e.target.value);
+          setNewComment(e.target.value.replace(/^[^\S]|[\n]/g, ""));
         }}
       />
-      <div>
-        <IoIosCreate />
+      <div
+        className={styles.create__btn}
+        onClick={() => {
+          if (newComment.length >= 1) createNewComment.mutateAsync();
+        }}
+      >
+        {loading ? (
+          <SyncLoader color="#fff" loading={loading} size={5} />
+        ) : (
+          <IoIosCreate />
+        )}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import CommentContainer from "../../../containers/commentContainer/CommentContai
 import {
   Comment,
   CommentAction,
+  CommentActionsTypes,
   CommentState,
 } from "../../../interfaces/utils.Interface";
 import CreateComment from "../createComment/CreateComment";
@@ -15,9 +16,9 @@ const ViewManyComments: FC<{
 }> = ({ comments, postId }) => {
   const reducer = (state: CommentState, action: CommentAction) => {
     switch (action.type) {
-      case "ADD":
+      case CommentActionsTypes.ADDNEWCOMMENT:
         return { ...state, comments: [...state.comments, action.newComment] };
-      case "REMOVE":
+      case CommentActionsTypes.REMOVECOMMENT:
         return {
           ...state,
           comments: state.comments.filter((comment) => {

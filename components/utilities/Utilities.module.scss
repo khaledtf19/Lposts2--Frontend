@@ -29,6 +29,29 @@
   resize: none;
 }
 
+.details {
+  display: flex;
+  position: relative;
+}
+
+.summary {
+  list-style: none;
+  display: flex;
+}
+
+.menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  left: auto;
+  background-color: var(--color-primary);
+  padding: 20px;
+  border: 1px solid var(--color-border);
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
 @include mixins.desktop() {
   .textarea {
     min-height: 30vh;
