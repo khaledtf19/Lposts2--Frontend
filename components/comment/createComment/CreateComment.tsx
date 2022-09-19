@@ -3,6 +3,8 @@ import axios from "axios";
 import { Dispatch, FC, useState } from "react";
 import { CommentAction } from "../../../interfaces/utils.Interface";
 
+import { IoIosCreate } from "react-icons/io";
+
 import styles from "./CreateComment.module.scss";
 
 const CreateComment: FC<{
@@ -13,7 +15,20 @@ const CreateComment: FC<{
 
   const createNewComment = useMutation(async () => {
     try {
-      const res = axios.post("https://lposts-2.herokuapp.com/posts");
+      const res = await axios.post(
+        "https://lposts-2.herokuapp.com/posts",
+        {
+          commentContent: newComment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("Lposts2__token") || ""
+            )}`,
+          },
+        }
+      );
+      const data = res.data;
     } catch (err) {}
   });
 
@@ -28,6 +43,9 @@ const CreateComment: FC<{
           setNewComment(e.target.value);
         }}
       />
+      <div>
+        <IoIosCreate />
+      </div>
     </div>
   );
 };
