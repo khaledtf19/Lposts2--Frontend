@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, PropsWithChildren, useEffect, useRef, useState } from "react";
 
 import { HiDotsVertical } from "react-icons/hi";
 
@@ -34,17 +34,28 @@ export const TextArea: FC<TextAreaProps> = ({
   );
 };
 
-export const DropDown = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const DropDown: FC<PropsWithChildren> = ({ children }) => {
+  const detailsRef = useRef<any>(null);
+
+  useEffect(() => {
+    const close = (e: MouseEvent) => {
+      if (!detailsRef.current.contains(e.target)) {
+        detailsRef.current.open = false;
+      }
+    };
+
+    document.addEventListener("click", close, true);
+    return () => {
+      document.removeEventListener("click", close, true);
+    };
+  }, [detailsRef]);
 
   return (
-    <details className={styles.details} open={isOpen}>
-      <summary className={styles.summary} onClick={() => setIsOpen(!isOpen)}>
+    <details className={styles.details} ref={detailsRef}>
+      <summary className={styles.summary}>
         <HiDotsVertical />
       </summary>
-      <div className={styles.menu}>
-        <div>1</div> <div>2</div>
-      </div>
+      <div className={styles.menu}>{children}</div>
     </details>
   );
 };

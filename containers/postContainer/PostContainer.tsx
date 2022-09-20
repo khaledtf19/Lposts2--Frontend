@@ -1,3 +1,5 @@
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { FC } from "react";
 import ViewManyComments from "../../components/comment/viewManyComments/ViewManyComments";
 import {
@@ -7,11 +9,37 @@ import {
 } from "../../components/post/postComponents/PostComponents";
 import { DropDown } from "../../components/utilities/Utilities";
 
-import { PostContainerProps } from "../../interfaces/utils.Interface";
+import {
+  PostActionsTypes,
+  PostContainerProps,
+} from "../../interfaces/utils.Interface";
 import Container from "../container/Container";
 import styles from "./PostContainer.module.scss";
 
-const PostContainer: FC<PostContainerProps> = ({ post, comments }) => {
+const PostContainer: FC<PostContainerProps> = ({
+  post,
+  comments,
+  dispatch,
+}) => {
+  const deletePost = useMutation(async () => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:3000/Posts/${post._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("Lposts2__token") || ""
+            )}`,
+          },
+        }
+      );
+      const data = res.data;
+      dispatch({ type: PostActionsTypes.REMOVEPOST, postId: post._id });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   return (
     <Container>
       <div className={styles.container}>
@@ -21,7 +49,16 @@ const PostContainer: FC<PostContainerProps> = ({ post, comments }) => {
             avatar={post.owner.avatar}
             userId={post.owner._id}
           />
-          <DropDown />
+          <DropDown>
+            <div>edit</div>
+            <div
+              onClick={() => {
+                deletePost.mutateAsync();
+              }}
+            >
+              delete
+            </div>
+          </DropDown>
         </div>
         <div className={styles.postContent__container}>
           <PostContent postContent={post.postContent} />

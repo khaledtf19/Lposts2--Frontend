@@ -17,6 +17,7 @@ export interface User {
   email: string;
 }
 
+// POST
 export interface Post {
   _id: string;
   postContent: string;
@@ -26,7 +27,20 @@ export interface Post {
   createdAt: string;
   updatedAt: string;
 }
+export enum PostActionsTypes {
+  REMOVEPOST = "REMOVE",
+}
 
+export type PostAction = {
+  type: PostActionsTypes.REMOVEPOST;
+  postId: string;
+};
+
+export interface PostState {
+  posts: Post[];
+}
+
+// Comment
 export interface Comment {
   _id: string;
   postId: string;
@@ -37,9 +51,26 @@ export interface Comment {
   whoLike: string[];
 }
 
+export enum CommentActionsTypes {
+  ADDNEWCOMMENT = "ADD",
+  REMOVECOMMENT = "REMOVE",
+}
+
+export type CommentAction =
+  | {
+      type: CommentActionsTypes.ADDNEWCOMMENT;
+      newComment: Comment;
+    }
+  | { type: CommentActionsTypes.REMOVECOMMENT; commentId: string };
+
+export interface CommentState {
+  comments: Comment[];
+}
+
 export interface PostContainerProps {
   post: Post;
   comments?: boolean;
+  dispatch: Dispatch<PostAction>;
 }
 
 export interface ViewPostsProps {
@@ -77,20 +108,4 @@ export interface TextAreaProps {
 }
 export interface CreateNewPost {
   postContent: string;
-}
-
-export enum CommentActionsTypes {
-  ADDNEWCOMMENT = "ADD",
-  REMOVECOMMENT = "REMOVE",
-}
-
-export type CommentAction =
-  | {
-      type: CommentActionsTypes.ADDNEWCOMMENT;
-      newComment: Comment;
-    }
-  | { type: CommentActionsTypes.REMOVECOMMENT; commentId: string };
-
-export interface CommentState {
-  comments: Comment[];
 }

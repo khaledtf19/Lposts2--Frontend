@@ -22,9 +22,8 @@
   font-size: 0.9rem;
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--color-gray);
-  }
+  &:hover,
+  &:active,
   &:focus {
     background-color: var(--color-gray);
   }

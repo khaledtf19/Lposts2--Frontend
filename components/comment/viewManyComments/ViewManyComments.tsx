@@ -21,9 +21,9 @@ const ViewManyComments: FC<{
       case CommentActionsTypes.REMOVECOMMENT:
         return {
           ...state,
-          comments: state.comments.filter((comment) => {
-            return comment._id !== action.commentId;
-          }),
+          comments: state.comments.filter(
+            (comment) => comment._id !== action.commentId
+          ),
         };
       default:
         return state;
