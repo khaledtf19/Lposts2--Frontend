@@ -70,7 +70,7 @@ export interface CommentState {
 export interface PostContainerProps {
   post: Post;
   comments?: boolean;
-  dispatch: Dispatch<PostAction>;
+  dispatch?: Dispatch<PostAction>;
 }
 
 export interface ViewPostsProps {

@@ -34,7 +34,8 @@ const PostContainer: FC<PostContainerProps> = ({
         }
       );
       const data = res.data;
-      dispatch({ type: PostActionsTypes.REMOVEPOST, postId: post._id });
+      if (dispatch)
+        dispatch({ type: PostActionsTypes.REMOVEPOST, postId: post._id });
     } catch (err) {
       console.log(err);
     }
