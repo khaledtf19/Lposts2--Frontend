@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import styles from "./progress.module.scss";
 
 export interface BarProps {
   animationDuration: number;

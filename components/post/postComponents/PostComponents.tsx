@@ -4,7 +4,6 @@ import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 
 import styles from "./PostComponents.module.scss";
 import UserAvatar from "../../userAvatar/UserAvatar";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";

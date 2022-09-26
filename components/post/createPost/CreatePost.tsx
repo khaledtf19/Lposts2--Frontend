@@ -2,8 +2,9 @@ import React, { FC, useState } from "react";
 
 import Container from "../../../containers/container/Container";
 import { useGetUser } from "../../../hooks/authHooks";
+import { PostPopupTypes } from "../../../interfaces/utils.Interface";
 import UserAvatar from "../../userAvatar/UserAvatar";
-import CreatePostPopup from "../createPostPopup/CreatePostPopup";
+import PostPopup from "../PostPopup/PostPopup";
 
 import styles from "./CreatePost.module.scss";
 
@@ -23,7 +24,11 @@ const CreatePost: FC = () => {
           </div>
         </Container>
       )}
-      <>{open && <CreatePostPopup open={open} setOpen={setOpen} />}</>
+      <>
+        {open && (
+          <PostPopup setOpen={setOpen} type={PostPopupTypes.CREATENEWPOST} />
+        )}
+      </>
     </>
   );
 };

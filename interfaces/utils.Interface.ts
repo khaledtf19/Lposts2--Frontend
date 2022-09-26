@@ -88,11 +88,6 @@ export interface BackDropProps {
   onClick: Function;
 }
 
-export interface CreatePostPopupProps {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-}
-
 export interface ButtonProps {
   text: string;
   onClick: Function;
@@ -108,4 +103,9 @@ export interface TextAreaProps {
 }
 export interface CreateNewPost {
   postContent: string;
+}
+
+export enum PostPopupTypes {
+  CREATENEWPOST = "create",
+  EDITPOST = "edit",
 }

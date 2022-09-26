@@ -1,13 +1,15 @@
 import { FC, PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import Navbar from "../../components/navbar/Navbar";
-import styles from "./Layout.module.scss";
-import ErrorPopup from "../../components/errorPopup/ErrorPopup";
 
+import Navbar from "../../components/navbar/Navbar";
+import ErrorPopup from "../../components/errorPopup/ErrorPopup";
 import Progress from "../../components/progress/Progress";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setAnimation } from "../../features/loading/loadingSlice";
+
+import styles from "./Layout.module.scss";
+import Modal from "../../components/modal/Modal";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
@@ -44,6 +46,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 
       <main className={styles.layout__main}>{children}</main>
       <ErrorPopup />
+      <Modal />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import styles from "./styles.module.scss";
+import styles from "./progress.module.scss";
 
 interface ProgressContainerProps {
   animationDuration: number;
