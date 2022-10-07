@@ -78,12 +78,13 @@ const PostPopup: FC<{
             value={createPost}
             placeholder="Create new post..."
           />
+          <p>{createPost.length} out of 222</p>
         </div>
         <div className={styles.buttons__container}>
           <Button
             text={PostPopupTypes.CREATENEWPOST === type ? "Create" : "Edit"}
             onClick={() => {
-              if (createPost.length > 1) {
+              if (createPost.length >= 1) {
                 if (PostPopupTypes.CREATENEWPOST === type) {
                   handelCreatePost.mutateAsync();
                 } else {

@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import ViewManyComments from "../../components/comment/viewManyComments/ViewManyComments";
 import {
@@ -26,13 +27,16 @@ const PostContainer: FC<PostContainerProps> = ({
   comments,
   dispatch,
 }) => {
+  const router = useRouter();
+  const reduxDispatch = useAppDispatch();
+
   const [openEdit, setOpenEdit] = useState(false);
   const { data } = useQuery<User>(["user"]);
 
   const deletePost = useMutation(async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/Posts/${post._id}`,
+        `https://lposts-2.herokuapp.com/Posts/${post._id}`,
         {
           headers: {
             Authorization: `Bearer ${JSON.parse(
@@ -41,15 +45,12 @@ const PostContainer: FC<PostContainerProps> = ({
           },
         }
       );
-      const data = res.data;
       if (dispatch)
         dispatch({ type: PostActionsTypes.REMOVEPOST, postId: post._id });
     } catch (err) {
       console.log(err);
     }
   });
-
-  const reduxDispatch = useAppDispatch();
 
   return (
     <>
@@ -78,6 +79,9 @@ const PostContainer: FC<PostContainerProps> = ({
                         btnMessage: "Delete",
                         btnFun: () => {
                           deletePost.mutateAsync();
+                          if (router.pathname === "/post/[id]") {
+                            router.push("/");
+                          }
                           reduxDispatch(closeModal());
                         },
                       })

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { FC, useReducer } from "react";
 import CommentContainer from "../../../containers/commentContainer/CommentContainer";
 import {
@@ -5,6 +6,7 @@ import {
   CommentAction,
   CommentActionsTypes,
   CommentState,
+  User,
 } from "../../../interfaces/utils.Interface";
 import CreateComment from "../createComment/CreateComment";
 
@@ -14,6 +16,7 @@ const ViewManyComments: FC<{
   comments: Comment[];
   postId: string;
 }> = ({ comments, postId }) => {
+  const { data } = useQuery<User>(["user"]);
   const reducer = (state: CommentState, action: CommentAction) => {
     switch (action.type) {
       case CommentActionsTypes.ADDNEWCOMMENT:
@@ -37,9 +40,9 @@ const ViewManyComments: FC<{
   return (
     <div className={styles.container}>
       {currentComments.comments.map((comment, index) => (
-        <CommentContainer key={index} comment={comment} />
+        <CommentContainer key={index} comment={comment} dispatch={dispatch} />
       ))}
-      <CreateComment dispatch={dispatch} postId={postId} />
+      {data?._id && <CreateComment dispatch={dispatch} postId={postId} />}
     </div>
   );
 };
