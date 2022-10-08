@@ -1,4 +1,4 @@
-import { FC, useReducer } from "react";
+import { FC, useEffect, useReducer } from "react";
 
 import PostContainer from "../../../containers/postContainer/PostContainer";
 import {
@@ -18,12 +18,18 @@ const ViewManyPosts: FC<ViewPostsProps> = ({ posts }) => {
           ...state,
           posts: state.posts.filter((post) => post._id !== action.postId),
         };
+      case PostActionsTypes.CHANGEPOSTS:
+        return { posts: action.posts };
       default:
         return state;
     }
   };
 
   const [currentPosts, dispatch] = useReducer(reducer, { posts: posts });
+
+  useEffect(() => {
+    dispatch({ type: PostActionsTypes.CHANGEPOSTS, posts: posts });
+  }, [posts]);
 
   return (
     <div className={styles.posts__container}>

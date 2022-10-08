@@ -48,12 +48,15 @@ export const PostActions: FC<{
   comments: number;
 }> = ({ postId, whoLike, comments }) => {
   const [currentWhoLike, setCurrentWhoLike] = useState(whoLike);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { data } = useQuery<User>(["user"]);
 
   const dispatch = useAppDispatch();
 
   const handleLike = useMutation(async () => {
     try {
+      setIsLoading(true);
       const res = await axios.post<{ likes: number; whoLike: string[] }>(
         `https://lposts-2.herokuapp.com/posts/like/${postId}`,
         {},
@@ -67,7 +70,10 @@ export const PostActions: FC<{
       );
       const data = res.data;
       setCurrentWhoLike(data.whoLike);
-    } catch (err) {}
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -75,8 +81,10 @@ export const PostActions: FC<{
       <div
         className={styles.like}
         onClick={() => {
-          if (data) handleLike.mutate();
-          else dispatch(addError(["Login First..."]));
+          if (!isLoading) {
+            if (data) handleLike.mutate();
+            else dispatch(addError(["Login First..."]));
+          }
         }}
       >
         {data ? (

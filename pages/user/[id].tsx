@@ -28,6 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       `https://lposts-2.herokuapp.com/posts/user/${id}`
     );
     const data = res.data;
+
     return { props: { posts: data.posts, user: data.user } };
   } catch (err) {
     return { props: { posts: null, user: null } };

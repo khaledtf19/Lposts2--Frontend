@@ -20,7 +20,9 @@
 
   .userInfo {
     font-size: 1rem;
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       color: var(--color-text2);
     }
   }
@@ -40,7 +42,9 @@
     border-right: 1px solid var(--color-border);
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       background-color: var(--color-hover);
       border-radius: 5px;
     }
@@ -53,7 +57,9 @@
     width: 100%;
     border-left: 1px solid var(--color-border);
     cursor: pointer;
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       background-color: var(--color-hover);
       border-radius: 5px;
     }

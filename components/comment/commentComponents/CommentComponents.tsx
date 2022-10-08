@@ -22,6 +22,8 @@ export const CommentActions: FC<{
   createdAt: string;
 }> = ({ commentId, whoLike, createdAt }) => {
   const [currentWhoLike, setCurrentWhoLike] = useState(whoLike);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { data } = useQuery<User>(["user"]);
 
   const date = new Date(createdAt);
@@ -29,6 +31,7 @@ export const CommentActions: FC<{
   const dispatch = useAppDispatch();
 
   const handleLike = useMutation(async () => {
+    setIsLoading(true);
     try {
       const res = await axios.put<{ whoLike: string[] }>(
         `https://lposts-2.herokuapp.com/comments/like/${commentId}`,
@@ -43,7 +46,10 @@ export const CommentActions: FC<{
       );
       const data = res.data;
       setCurrentWhoLike(data.whoLike);
-    } catch (err) {}
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -51,8 +57,10 @@ export const CommentActions: FC<{
       <div
         className={styles.like}
         onClick={() => {
-          if (data) handleLike.mutateAsync();
-          else dispatch(addError(["Login First..."]));
+          if (!isLoading) {
+            if (data) handleLike.mutateAsync();
+            else dispatch(addError(["Login First..."]));
+          }
         }}
       >
         {data ? (

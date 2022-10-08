@@ -14,7 +14,8 @@ export interface User {
   _id: string;
   name: string;
   avatar: string;
-  email: string;
+  following: string[];
+  followers: string[];
 }
 
 // POST
@@ -29,12 +30,18 @@ export interface Post {
 }
 export enum PostActionsTypes {
   REMOVEPOST = "REMOVE",
+  CHANGEPOSTS = "CHANGE",
 }
 
-export type PostAction = {
-  type: PostActionsTypes.REMOVEPOST;
-  postId: string;
-};
+export type PostAction =
+  | {
+      type: PostActionsTypes.REMOVEPOST;
+      postId: string;
+    }
+  | {
+      type: PostActionsTypes.CHANGEPOSTS;
+      posts: Post[];
+    };
 
 export interface PostState {
   posts: Post[];
