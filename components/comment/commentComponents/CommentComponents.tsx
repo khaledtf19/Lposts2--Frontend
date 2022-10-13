@@ -15,6 +15,7 @@ import { Comment, User } from "../../../interfaces/utils.Interface";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { addError } from "../../../features/error/errorSlice";
 import { Button } from "../../utilities/Utilities";
+import { ClipLoader } from "react-spinners";
 
 export const CommentActions: FC<{
   commentId: string;
@@ -72,7 +73,11 @@ export const CommentActions: FC<{
         ) : (
           <AiOutlineLike />
         )}
-        {currentWhoLike.length}
+        {isLoading ? (
+          <ClipLoader color="#fff" loading={isLoading} size={10} />
+        ) : (
+          <p>{currentWhoLike.length}</p>
+        )}
       </div>
       <p className={styles.date}>{date.toLocaleString()}</p>
     </div>

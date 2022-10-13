@@ -10,6 +10,7 @@ import axios from "axios";
 import { User } from "../../../interfaces/utils.Interface";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { addError } from "../../../features/error/errorSlice";
+import { ClipLoader } from "react-spinners";
 
 export const UserInfo: FC<UserInfoProps> = ({ name, avatar, userId }) => {
   return (
@@ -96,7 +97,11 @@ export const PostActions: FC<{
         ) : (
           <AiOutlineLike />
         )}
-        {currentWhoLike.length}
+        {isLoading ? (
+          <ClipLoader color="#fff" loading={isLoading} size={10} />
+        ) : (
+          <p>{currentWhoLike.length}</p>
+        )}
       </div>
       <Link href={`/post/${postId}`}>
         <a className={styles.comments}>Comments {comments}</a>
