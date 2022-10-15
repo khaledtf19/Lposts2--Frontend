@@ -33,6 +33,7 @@ const PostContainer: FC<PostContainerProps> = ({
   const [openEdit, setOpenEdit] = useState(false);
   const { data } = useQuery<User>(["user"]);
 
+
   const deletePost = useMutation(async () => {
     try {
       const res = await axios.delete(
