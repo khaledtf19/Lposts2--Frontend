@@ -33,6 +33,7 @@ const PostContainer: FC<PostContainerProps> = ({
   const [openEdit, setOpenEdit] = useState(false);
   const { data } = useQuery<User>(["user"]);
 
+  const date = new Date(post.createdAt);
 
   const deletePost = useMutation(async () => {
     try {
@@ -97,6 +98,7 @@ const PostContainer: FC<PostContainerProps> = ({
             )}
           </div>
           <div className={styles.postContent__container}>
+            <p className={styles.date}>{date.toLocaleString()}</p>
             <PostContent postContent={post.postContent} />
           </div>
           <div className={styles.actions__container}>
