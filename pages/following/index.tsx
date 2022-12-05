@@ -11,7 +11,7 @@ const Following: NextPage = () => {
     async (): Promise<Post[] | []> => {
       try {
         const res = await axios.get<Post[] | []>(
-          "https://lposts-2.herokuapp.com/posts/following",
+          "https://lposts2.onrender.com/posts/following",
           {
             headers: {
               Authorization: `Bearer ${JSON.parse(

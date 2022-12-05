@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   try {
     const res = await axios.get<Post>(
-      `https://lposts-2.herokuapp.com/posts/${id}`
+      `https://lposts2.onrender.com/posts/${id}`
     );
 
     const data = res.data;

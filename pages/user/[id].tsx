@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
 import ViewManyPosts from "../../components/post/viewManyPosts/ViewManyPosts";
 import UserProfile from "../../components/userProfile/UserProfile";
 import { Post, User } from "../../interfaces/utils.Interface";
@@ -7,6 +8,11 @@ import { Post, User } from "../../interfaces/utils.Interface";
 const User: NextPage<{ posts: Post[]; user: User }> = ({ posts, user }) => {
   return (
     <>
+      <Head>
+        <title>User</title>
+        <meta name="description" content="LPosts 2 User" />
+        <meta name="keywords" content="user, posts, "></meta>
+      </Head>
       {posts ? (
         <>
           <UserProfile user={user} />
@@ -25,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { id } = context.query;
     const res = await axios.get<{ posts: Post[]; user: User }>(
-      `https://lposts-2.herokuapp.com/posts/user/${id}`
+      `https://lposts2.onrender.com/posts/user/${id}`
     );
     const data = res.data;
 

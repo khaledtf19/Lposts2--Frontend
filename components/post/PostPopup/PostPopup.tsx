@@ -46,7 +46,7 @@ const PostPopup: FC<{
   const handelEditPost = useMutation(async () => {
     try {
       const res = await axios.put<Post>(
-        `https://lposts-2.herokuapp.com/posts/${postId}`,
+        `https://lposts2.onrender.com/posts/${postId}`,
         { postContent: createPost },
         {
           headers: {

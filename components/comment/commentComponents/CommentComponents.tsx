@@ -111,7 +111,7 @@ export const CommentContent: FC<{
   const handelEditPost = useMutation(async () => {
     try {
       const res = await axios.put<Comment>(
-        `https://lposts-2.herokuapp.com/comments/${commentId}`,
+        `https://lposts2.onrender.com/comments/${commentId}`,
         { commentContent: newCommentContent },
         {
           headers: {

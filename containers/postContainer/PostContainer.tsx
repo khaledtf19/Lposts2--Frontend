@@ -38,7 +38,7 @@ const PostContainer: FC<PostContainerProps> = ({
   const deletePost = useMutation(async () => {
     try {
       const res = await axios.delete(
-        `https://lposts-2.herokuapp.com/Posts/${post._id}`,
+        `https://lposts2.onrender.com/Posts/${post._id}`,
         {
           headers: {
             Authorization: `Bearer ${JSON.parse(

@@ -15,7 +15,7 @@ const UserProfile: FC<{ user: User }> = ({ user }) => {
     try {
       setIsLoading(true);
       const res = await axios.post(
-        `https://lposts-2.herokuapp.com/users/follow/${user._id}`,
+        `https://lposts2.onrender.com/users/follow/${user._id}`,
         {},
         {
           headers: {

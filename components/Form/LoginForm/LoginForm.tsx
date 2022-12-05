@@ -38,7 +38,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginInputs) => {
     try {
       const response = await axios.post(
-        "https://lposts-2.herokuapp.com/auth/login",
+        "https://lposts2.onrender.com/auth/login",
         { username: data.email, password: data.password }
       );
       const fData = response.data;

@@ -45,10 +45,7 @@ function RegisterForm() {
 
   const onSubmit = async (data: RegisterInputs) => {
     try {
-      const res = await axios.post(
-        "https://lposts-2.herokuapp.com/users",
-        data
-      );
+      const res = await axios.post("https://lposts2.onrender.com/users", data);
       if (res.data) {
         router.push("/login");
       }

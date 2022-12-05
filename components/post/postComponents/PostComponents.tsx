@@ -59,7 +59,7 @@ export const PostActions: FC<{
     try {
       setIsLoading(true);
       const res = await axios.post<{ likes: number; whoLike: string[] }>(
-        `https://lposts-2.herokuapp.com/posts/like/${postId}`,
+        `https://lposts2.onrender.com/posts/like/${postId}`,
         {},
         {
           headers: {

@@ -31,7 +31,7 @@ const CommentContainer: FC<{
   const deletePost = useMutation(async () => {
     try {
       const res = await axios.delete(
-        `https://lposts-2.herokuapp.com/comments/${comment._id}`,
+        `https://lposts2.onrender.com/comments/${comment._id}`,
         {
           headers: {
             Authorization: `Bearer ${JSON.parse(

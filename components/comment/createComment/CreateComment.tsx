@@ -22,7 +22,7 @@ const CreateComment: FC<{
     try {
       setLoading(true);
       const res = await axios.post(
-        `https://lposts-2.herokuapp.com/comments/post/${postId}`,
+        `https://lposts2.onrender.com/comments/post/${postId}`,
         {
           commentContent: newComment,
         },

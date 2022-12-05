@@ -63,7 +63,7 @@ export const FormAvatarInput: FC<FormAvatarInputProps> = ({
     <div className={style.input__container}>
       <div className={style.avatar__container}>
         <Image
-          src={`https://avatars.dicebear.com/api/bottts/:${avatar}.svg`}
+          src={`https://lposts2.onrender.com/api/bottts/:${avatar}.svg`}
           alt={`${avatar}`}
           width={100}
           height={100}
